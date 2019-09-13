@@ -120,7 +120,7 @@ class Recurly_Client
    */
   public static function disableXmlEntityLoading()
   {
-    $disable = getenv('RECURLY_DISABLE_ENTITY_LOADING');
+    $disable = getenv('RECURLY_DISABLE_ENTITY_LOADING', true);
     if ($disable === false) {
         $disable = true;
     } else {
