@@ -1,6 +1,17 @@
 # Recurly PHP Client Library CHANGELOG
 
+## Version 2.12.8 (October 22nd, 2019)
+
+* Add shipping address to Purchase [PR] (https://github.com/recurly/recurly-client-php/pull/435)
+* Subscription timeframe changes [PR] (https://github.com/recurly/recurly-client-php/pull/419)
+
+## Version 2.12.7 (September 20th, 2019)
+
+* Fix issue with missing requires [PR](https://github.com/recurly/recurly-client-php/pull/434).
+
 ## Version 2.12.6 (September 13th, 2019)
+
+**Note**: This release is broken and 2.12.7 should be used instead.
 
 * Support billing_info on Subscription, Invoice & Gift card [PR](https://github.com/recurly/recurly-client-php/pull/424)
 * PSD2 billing info changes [PR](https://github.com/recurly/recurly-client-php/pull/426)
