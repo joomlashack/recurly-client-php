@@ -6,15 +6,11 @@ The Recurly PHP Client library is an open source library to interact with
 Recurly's subscription management from your PHP website. The library interacts
 with Recurly's [REST API](https://dev.recurly.com/docs/getting-started).
 
-**Note:** This version uses Recurly API v2. There are substantial differences
-between this version of the client library and versions before _0.5.0_. Please
-be careful when upgrading.
-
 ## Requirements
 
 ### cURL and OpenSSL
 
-The PHP library depends on PHP 5.6 (or higher) and libcurl compiled with
+The PHP library depends on PHP 5.6 (or higher, though only PHP 7.2 or newer is officially supported) and libcurl compiled with
 OpenSSL support. Open up a `phpinfo();` page and verify that under the curl
 section, there's a line that says something like:
 
@@ -117,7 +113,6 @@ $ vendor/bin/phpunit
 ## Supported Versions
 
 We support all ["currently supported versions" of PHP](http://php.net/supported-versions.php).
-We also support the LTS versions of [HHVM](https://docs.hhvm.com/hhvm/installation/release-schedule), but only those which support PHP and Composer.
 
 ## Contributing Guidelines
 

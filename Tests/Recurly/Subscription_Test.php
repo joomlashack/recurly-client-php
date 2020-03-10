@@ -287,10 +287,50 @@ class Recurly_SubscriptionTest extends Recurly_TestCase
     $this->assertEquals($subscription->remaining_pause_cycles, 1);
   }
 
+  public function testCancelSubscriptionWithoutTimeframe() {
+    $this->client->addResponse('GET', '/subscriptions/012345678901234567890123456789ab', 'subscriptions/show-200.xml');
+    $this->client->addResponse('PUT', 'https://api.recurly.com/v2/subscriptions/012345678901234567890123456789ab/cancel', 'subscriptions/show-200.xml');
+    $subscription = Recurly_Subscription::get('012345678901234567890123456789ab', $this->client);
+    $subscription->cancel();
+  }
+
+  public function testCancelSubscriptionWithTimeframe() {
+    $this->client->addResponse('GET', '/subscriptions/012345678901234567890123456789ab', 'subscriptions/show-200.xml');
+    $this->client->addResponse('PUT', 'https://api.recurly.com/v2/subscriptions/012345678901234567890123456789ab/cancel?timeframe=term_end', 'subscriptions/show-200.xml');
+    $subscription = Recurly_Subscription::get('012345678901234567890123456789ab', $this->client);
+    $subscription->cancel('term_end');
+  }
+
   public function testResumeSubscription() {
     $this->client->addResponse('GET', '/subscriptions/012345678901234567890123456789ab', 'subscriptions/show-200.xml');
     $this->client->addResponse('PUT', 'https://api.recurly.com/v2/subscriptions/012345678901234567890123456789ab/resume', 'subscriptions/show-200.xml');
     $subscription = Recurly_Subscription::get('012345678901234567890123456789ab', $this->client);
     $subscription->resume();
   }
-}
+
+  public function testConvertTrialWithTransactionType() {
+    $this->client->addResponse('GET', '/subscriptions/012345678901234567890123456789ab', 'subscriptions/show-200-trial.xml');
+    $this->client->addResponse('PUT', 'https://api.recurly.com/v2/subscriptions/012345678901234567890123456789ab/convert_trial', 'subscriptions/convert-trial-200.xml');
+    $subscription = Recurly_Subscription::get('012345678901234567890123456789ab', $this->client);
+    $subscription->convertTrialMoto();
+    $this->assertEquals($subscription->trial_ends_at, $subscription->current_period_started_at);
+  }
+
+  public function testConvertTrialWith3DSToken() {
+    $this->client->addResponse('GET', '/subscriptions/012345678901234567890123456789ab', 'subscriptions/show-200-trial.xml');
+    $this->client->addResponse('PUT', 'https://api.recurly.com/v2/subscriptions/012345678901234567890123456789ab/convert_trial', 'subscriptions/convert-trial-200.xml');
+    $subscription = Recurly_Subscription::get('012345678901234567890123456789ab', $this->client);
+    $subscription->convertTrial("token");
+    $this->assertEquals($subscription->trial_ends_at, $subscription->current_period_started_at);
+  }
+
+  public function testConvertTrialWithout3DSToken() {
+    $this->client->addResponse('GET', '/subscriptions/012345678901234567890123456789ab', 'subscriptions/show-200-trial.xml');
+    $this->client->addResponse('PUT', 'https://api.recurly.com/v2/subscriptions/012345678901234567890123456789ab/convert_trial', 'subscriptions/convert-trial-200.xml');
+    $subscription = Recurly_Subscription::get('012345678901234567890123456789ab', $this->client);    
+    $subscription->convertTrial();
+    $this->assertEquals($subscription->trial_ends_at, $subscription->current_period_started_at);
+  }
+
+
+}         

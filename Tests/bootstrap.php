@@ -1,19 +1,20 @@
 <?php
 
+use PHPUnit\Framework\TestCase;
 
-error_reporting(E_ALL);
-ini_set('display_errors','On');
+require_once dirname(__DIR__) . '/vendor/autoload.php';
 
-// Setting timezone for time() function.
-date_default_timezone_set('America/Los_Angeles');
-
+// Load compatibility layers for PHP < 7.x.
+if (! class_exists(TestCase::class)) {
+  require_once __DIR__ . '/Compat/TestCase.php';
+}
 
 /**
  * Base class for our tests that sets up a mock client.
  *
  * @property Recurly_MockClient $client
  */
-abstract class Recurly_TestCase extends PHPUnit_Framework_TestCase {
+abstract class Recurly_TestCase extends TestCase {
   function setUp() {
     $this->client = new Recurly_MockClient();
     foreach ($this->defaultResponses() as $request) {
@@ -84,7 +85,7 @@ class Recurly_MockClient {
     }
 
     if ($bodyLineNumber < sizeof($fixture))
-      $body = implode(array_slice($fixture, $bodyLineNumber), "\n");
+      $body = implode("\n", array_slice($fixture, $bodyLineNumber));
 
     return new Recurly_ClientResponse($statusCode, $headers, $body);
   }

@@ -1,9 +1,32 @@
 # Recurly PHP Client Library CHANGELOG
 
+## Version 2.12.11 (February 20, 2020)
+
+This brings us up to API version 2.25. There are no breaking changes
+
+* Allow external domains for getFile() calls [PR](https://github.com/recurly/recurly-client-php/pull/454)
+* Cleanup old upgrade warning [PR](https://github.com/recurly/recurly-client-php/pull/455)
+* Add 'Delete' to ShippingAddress object [PR](https://github.com/recurly/recurly-client-php/pull/457)
+* Add external_sku to Adjustment (included in API version 2.24) [PR](https://github.com/recurly/recurly-client-php/pull/458)
+* Add convertTrial() to Subscription [PR](https://github.com/recurly/recurly-client-php/pull/459)
+
+## Version 2.12.10 (December 31, 2019)
+
+* Add vat_number to ShippingAddress class [PR](https://github.com/recurly/recurly-client-php/pull/443)
+* Update the documentation and testing matrix for current PHP releases [PR](https://github.com/recurly/recurly-client-php/pull/445)
+* Simplify the PHPUnit configuration [PR](https://github.com/recurly/recurly-client-php/pull/446)
+* Ensure PHP 7.4 compatibility [PR](https://github.com/recurly/recurly-client-php/pull/449)
+
+## Version 2.12.9 (November 21, 2019)
+
+This brings us up to API version 2.24. There are no breaking changes
+
+* Add Item class [PR](https://github.com/recurly/recurly-client-php/pull/441)
+
 ## Version 2.12.8 (October 22nd, 2019)
 
-* Add shipping address to Purchase [PR] (https://github.com/recurly/recurly-client-php/pull/435)
-* Subscription timeframe changes [PR] (https://github.com/recurly/recurly-client-php/pull/419)
+* Add shipping address to Purchase [PR](https://github.com/recurly/recurly-client-php/pull/435)
+* Subscription timeframe changes [PR](https://github.com/recurly/recurly-client-php/pull/419)
 
 ## Version 2.12.7 (September 20th, 2019)
 
